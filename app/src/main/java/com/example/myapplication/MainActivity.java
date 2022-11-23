@@ -1,6 +1,5 @@
 package com.example.myapplication;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,8 +8,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
     Button Submit;
     EditText Input1;
     EditText Input2;
@@ -51,8 +51,16 @@ public class MainActivity extends Activity {
                         int equal = number1 + number2 * number3;
                         String equalTo = String.valueOf(equal);
                         Equivalent.setText(equalTo);
+                        openDialog(equalTo);
                     }
                 });
-
+    }
+    private void openDialog(String arg) {
+        // Create Bundle instance, this will allow transfer of data from Activity to DialogFragment
+        Bundle args = new Bundle();
+        args.putString("result", arg);
+        DialogFragment dialogFragment = new DialogFragment();
+        dialogFragment.setArguments(args);
+        dialogFragment.show(getSupportFragmentManager(), "result");
     }
 }
